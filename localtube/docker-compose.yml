@@ -1,0 +1,151 @@
+version: '3.8'
+
+services:
+  # ═══════════════════════════════════════════════
+  # Elasticsearch - Video Metadata Storage
+  # ═══════════════════════════════════════════════
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: localtube-elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=localtube-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - localtube-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # ═══════════════════════════════════════════════
+  # Kibana - Elasticsearch UI/Dashboard
+  # ═══════════════════════════════════════════════
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: localtube-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - SERVER_NAME=kibana
+      - SERVER_HOST=0.0.0.0
+      - xpack.security.enabled=false
+      - xpack.encryptedSavedObjects.encryptionKey=min-32-byte-long-strong-encryption-key-for-kibana
+    ports:
+      - "5601:5601"
+    networks:
+      - localtube-network
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5601/api/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+#  # ═══════════════════════════════════════════════
+#  # LocalTube Backend - Spring Boot API
+#  # ═══════════════════════════════════════════════
+#  localtube-backend:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: localtube-backend
+#    environment:
+#      # Storage Configuration
+#      - UPLOAD_DIR=/data/uploads
+#      - HLS_DIR=/data/hls
+#
+#      # Elasticsearch Configuration
+#      - ELASTICSEARCH_HOST=elasticsearch
+#      - ELASTICSEARCH_PORT=9200
+#      - ELASTICSEARCH_SCHEME=http
+#      - ELASTICSEARCH_INDEX=videos
+#
+#      # Spring Boot Configuration
+#      - SPRING_PROFILES_ACTIVE=docker
+#      - SERVER_PORT=8080
+#
+#      # JVM Options
+#      - JAVA_OPTS=-Xms256m -Xmx1024m
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - video_uploads:/data/uploads
+#      - video_hls:/data/hls
+#    networks:
+#      - localtube-network
+#    depends_on:
+#      elasticsearch:
+#        condition: service_healthy
+#    healthcheck:
+#      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#      start_period: 90s
+#    restart: unless-stopped
+#
+#  # ═══════════════════════════════════════════════
+#  # LocalTube Frontend - React/Vite (Optional)
+#  # ═══════════════════════════════════════════════
+#  localtube-frontend:
+#    build:
+#      context: ./frontend
+#      dockerfile: Dockerfile
+#    container_name: localtube-frontend
+#    environment:
+#      - VITE_API_URL=http://localhost:8080
+#    ports:
+#      - "5173:80"
+#    networks:
+#      - localtube-network
+#    depends_on:
+#      - localtube-backend
+#    restart: unless-stopped
+
+# ═══════════════════════════════════════════════
+# Networks
+# ═══════════════════════════════════════════════
+networks:
+  localtube-network:
+    driver: bridge
+    name: localtube-network
+
+# ═══════════════════════════════════════════════
+# Volumes (Persistent Storage)
+# ═══════════════════════════════════════════════
+volumes:
+  elasticsearch_data:
+    driver: local
+    name: localtube-elasticsearch-data
+
+  video_uploads:
+    driver: local
+    name: localtube-uploads
+
+  video_hls:
+    driver: local
+    name: localtube-hls

@@ -1,0 +1,43 @@
+${AnsiColor.BRIGHT_CYAN}╔════════════════════════════════════════════════════════════════════╗
+║                                                                    ║${AnsiColor.BRIGHT_RED}
+║         ██╗      ██████╗  ██████╗ ██╗  ██╗██╗                    ║
+║         ██║     ██╔═══██╗██╔════╝ ██║  ██║██║                    ║
+║         ██║     ██║   ██║██║  ███╗███████║██║                    ║
+║         ██║     ██║   ██║██║   ██║██╔══██║██║                    ║
+║         ███████╗╚██████╔╝╚██████╔╝██║  ██║███████╗               ║
+║         ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝               ║${AnsiColor.BRIGHT_MAGENTA}
+║                                                                    ║
+║         ████████╗██╗   ██╗██████╗ ███████╗                       ║
+║         ╚══██╔══╝██║   ██║██╔══██╗██╔════╝                       ║
+║            ██║   ██║   ██║██████╔╝█████╗                         ║
+║            ██║   ██║   ██║██╔══██╗██╔══╝                         ║
+║            ██║   ╚██████╔╝██████╔╝███████╗                       ║
+║            ╚═╝    ╚═════╝ ╚═════╝ ╚══════╝                       ║${AnsiColor.BRIGHT_CYAN}
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝
+${AnsiColor.BRIGHT_YELLOW}
+┌────────────────────────────────────────────────────────────────────┐
+│                                                                    │${AnsiColor.BRIGHT_WHITE}
+│                  🎬  PERSONAL VIDEO STREAMING                      │${AnsiColor.BRIGHT_YELLOW}
+│                     ━━━━━━ PLATFORM ━━━━━━                        │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+${AnsiColor.BRIGHT_CYAN}
+     ╭───────────────────╮  ╭───────────────────╮  ╭──────────────────╮${AnsiColor.BRIGHT_GREEN}
+     │   ⚡ LIGHTNING    │  │  🔒 FORT KNOX   │  │  🏠 YOUR DOMAIN │
+     │      FAST         │  │     SECURE        │  │   SELF-HOSTED   │${AnsiColor.BRIGHT_CYAN}
+     ╰───────────────────╯  ╰───────────────────╯  ╰──────────────────╯
+${AnsiColor.BRIGHT_BLUE}
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${AnsiColor.BRIGHT_MAGENTA}
+┃  📊 FEATURES                                                     ┃${AnsiColor.BRIGHT_BLUE}
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫${AnsiColor.BRIGHT_WHITE}
+┃  ▸ 4K HDR Streaming         ▸ Multi-User Support                ┃
+┃  ▸ Adaptive Bitrate         ▸ Watch History Tracking             ┃
+┃  ▸ Subtitle Support          ▸ Playlist Management                ┃
+┃  ▸ Mobile Apps              ▸ Real-time Transcoding              ┃${AnsiColor.BRIGHT_BLUE}
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+${AnsiColor.BRIGHT_CYAN}
+════════════════════════════════════════════════════════════════════${AnsiColor.BRIGHT_WHITE}
+          Built with ❤️  | Version 2.0.1 | © 2024${AnsiColor.BRIGHT_CYAN}
+════════════════════════════════════════════════════════════════════
+${AnsiColor.RESET}

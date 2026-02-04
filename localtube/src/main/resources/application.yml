@@ -1,0 +1,95 @@
+async:
+  core-pool-size: 2
+  max-pool-size: 5
+  queue-capacity: 100
+cors:
+  allowed-origins: http://localhost:3000,https://yourdomain.com
+ffmpeg:
+  path: /usr/bin/ffmpeg
+  probe:
+    path: /usr/bin/ffprobe
+file:
+  chunk-size: 5242880
+  temp-dir: /var/videos/temp
+  upload-dir: /var/videos
+jwt:
+  secret: 4gTduyxJahQatgIkxwGErvADeIjfdulxI98B8bAGUOKStnBVTyngXfU5jM1rMbVR
+logging:
+  level:
+    com:
+      videostream: DEBUG
+    org:
+      springframework:
+        data:
+          elasticsearch: DEBUG
+
+server:
+  port: 8080
+  tomcat:
+    max-swallow-size: 100MB
+  address: 0.0.0.0
+spring:
+  application:
+    name: video-streaming-platform
+
+  datasource:
+    url: jdbc:sqlserver://555-PTSVBZ:65388;instanceName=SQLEXPRESS;databaseName=test_portal;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: 123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 5000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect
+        default_schema: dbo
+
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    connection-timeout: 10s
+    socket-timeout: 60s
+    uris: http://localhost:9200
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 5GB
+      max-request-size: 5GB
+      resolve-lazily: false
+
+localtube:
+  storage:
+    upload-dir: ${UPLOAD_DIR:uploads}
+    hls-dir: ${HLS_DIR:hls}
+    max-file-size: 53687091200  # 50GB in bytes
+    min-disk-free: 5368709120   # 5GB in bytes
+
+  transcoding:
+    max-concurrent: 2
+    segment-duration: 6  # seconds
+    qualities:
+      - 480p
+      - 720p
+      - 1080p
+      - 2160p
+
+  elasticsearch:
+    host: ${ELASTICSEARCH_HOST:localhost}
+    port: ${ELASTICSEARCH_PORT:9200}
+    scheme: ${ELASTICSEARCH_SCHEME:http}
+    username: ${ELASTICSEARCH_USERNAME:}
+    password: ${ELASTICSEARCH_PASSWORD:}
+    index: ${ELASTICSEARCH_INDEX:videos}

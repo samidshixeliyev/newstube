@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Chunked Video Upload</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 600px; margin: 40px auto; }
+        progress { width: 100%; height: 24px; }
+        #status { margin: 15px 0; color: #444; }
+        button { padding: 10px 20px; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+<h2>Video Upload (chunked)</h2>
+
+<input type="file" id="videoFile" accept="video/*" />
+<button onclick="startUpload()">Upload</button>
+
+<div id="status">Ready...</div>
+<progress id="progress" value="0" max="100"></progress>
+<div id="percent">0%</div>
+
+<script src="script.js"></script>
+</body>
+</html>
